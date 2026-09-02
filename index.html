@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Police Management — Horaire, carte et lois pour le personnel policier</title>
+<meta name="description" content="Police Management aide le personnel policier du Québec à gérer son horaire, s'orienter sur le terrain et consulter les lois, même hors connexion.">
+<style>
+  :root{
+    --navy-deep:   #0c1522;
+    --navy-panel:  #121e30;
+    --navy-line:   #24354d;
+    --gold:        #c9a24a;
+    --gold-dim:    #8f7431;
+    --paper:       #eee9dd;
+    --paper-dim:   #a8a496;
+    --steel:       #5c7291;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--navy-deep);
+    color:var(--paper);
+    font-family:'Iowan Old Style','Georgia',ui-serif,serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .sans{ font-family:'Avenir Next','Segoe UI',ui-sans-serif,system-ui,sans-serif; }
+
+  a{ color:var(--gold); }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    border-bottom:1px solid var(--navy-line);
+    padding:18px 0;
+  }
+  .topbar .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .badge-mark{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    font-weight:700;
+    letter-spacing:.02em;
+    font-size:15px;
+    color:var(--paper);
+  }
+  .badge-mark svg{ flex-shrink:0; }
+  .topbar nav a{
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    font-size:14px;
+    text-decoration:none;
+    color:var(--paper-dim);
+    margin-left:26px;
+  }
+  .topbar nav a:hover{ color:var(--gold); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 76px;
+    border-bottom:1px solid var(--navy-line);
+    position:relative;
+  }
+  .hero .kicker{
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    color:var(--steel);
+    font-size:14px;
+    margin:0 0 18px;
+  }
+  .hero h1{
+    font-size:clamp(38px,6vw,64px);
+    line-height:1.05;
+    margin:0 0 24px;
+    max-width:11ch;
+    font-weight:500;
+  }
+  .hero p.lede{
+    font-size:19px;
+    line-height:1.6;
+    color:var(--paper-dim);
+    max-width:52ch;
+    margin:0 0 36px;
+  }
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .btn-store{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--gold);
+    color:var(--navy-deep);
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    font-weight:700;
+    font-size:15px;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:3px;
+  }
+  .btn-store:hover{ background:#dab55c; }
+  .hero-meta{
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    font-size:13px;
+    color:var(--paper-dim);
+  }
+
+  /* ---------- Sections ---------- */
+  section.block{
+    padding:64px 0;
+    border-bottom:1px solid var(--navy-line);
+  }
+  .block h2{
+    font-size:28px;
+    font-weight:500;
+    margin:0 0 10px;
+  }
+  .block .intro{
+    color:var(--paper-dim);
+    font-size:16px;
+    line-height:1.6;
+    max-width:56ch;
+    margin:0 0 40px;
+  }
+
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    border:1px solid var(--navy-line);
+  }
+  .feature-grid > div{
+    padding:28px 26px;
+    border-right:1px solid var(--navy-line);
+  }
+  .feature-grid > div:last-child{ border-right:none; }
+  .feature-grid h3{
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    font-size:13px;
+    letter-spacing:.03em;
+    color:var(--gold);
+    margin:0 0 14px;
+    font-weight:700;
+  }
+  .feature-grid ul{
+    margin:0;
+    padding:0 0 0 18px;
+    font-size:14.5px;
+    line-height:1.7;
+    color:var(--paper);
+  }
+  .feature-grid li{ margin-bottom:6px; }
+
+  @media (max-width:760px){
+    .feature-grid{ grid-template-columns:1fr; }
+    .feature-grid > div{ border-right:none; border-bottom:1px solid var(--navy-line); }
+    .feature-grid > div:last-child{ border-bottom:none; }
+  }
+
+  /* ---------- Privacy ---------- */
+  .privacy-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .privacy-row .num{
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    color:var(--gold);
+    font-size:13px;
+    margin-bottom:8px;
+  }
+  .privacy-row p{
+    color:var(--paper-dim);
+    line-height:1.65;
+    font-size:15.5px;
+  }
+  @media (max-width:700px){
+    .privacy-row{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Details table ---------- */
+  table.details{
+    width:100%;
+    border-collapse:collapse;
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    font-size:14.5px;
+  }
+  table.details tr{ border-bottom:1px solid var(--navy-line); }
+  table.details tr:last-child{ border-bottom:none; }
+  table.details td{ padding:14px 0; }
+  table.details td:first-child{ color:var(--paper-dim); width:180px; }
+  table.details td:last-child{ color:var(--paper); }
+
+  /* ---------- Footer ---------- */
+  footer{ padding:40px 0 60px; }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    font-size:13px;
+    color:var(--paper-dim);
+  }
+  footer a{ color:var(--paper-dim); text-decoration:underline; text-underline-offset:3px; }
+  footer a:hover{ color:var(--gold); }
+
+  .disclaimer{
+    font-family:'Avenir Next','Segoe UI',ui-sans-serif,sans-serif;
+    font-size:12.5px;
+    line-height:1.7;
+    color:var(--paper-dim);
+    max-width:64ch;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="badge-mark">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2 L21 5.5 V11 C21 16.5 17.2 20.7 12 22 C6.8 20.7 3 16.5 3 11 V5.5 Z" stroke="#c9a24a" stroke-width="1.4"/>
+      </svg>
+      Police Management
+    </div>
+    <nav>
+      <a href="#fonctions">Fonctions</a>
+      <a href="#confidentialite">Confidentialité</a>
+      <a href="#details">Détails</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker sans">Pour le personnel policier du Québec</p>
+    <h1>Ton quart, ta carte, tes lois — dans une seule app.</h1>
+    <p class="lede">Police Management regroupe l'horaire de travail, la carte opérationnelle de la Sûreté du Québec et les lois provinciales, consultables même sans connexion.</p>
+    <div class="hero-actions">
+      <a class="btn-store" href="https://apps.apple.com/ca/app/police-management/id6787241566?l=fr-CA" target="_blank" rel="noopener">Voir sur l'App Store</a>
+      <span class="hero-meta">Gratuit · iPhone · Classement 4+</span>
+    </div>
+  </div>
+</header>
+
+<section class="block" id="fonctions">
+  <div class="wrap">
+    <h2>Trois outils, un seul objectif</h2>
+    <p class="intro">Construite autour du quotidien du travail policier : planifier les quarts, se repérer sur le terrain et vérifier un règlement rapidement.</p>
+    <div class="feature-grid">
+      <div>
+        <h3>HORAIRE & QUARTS</h3>
+        <ul>
+          <li>Calendrier modifiable en un geste</li>
+          <li>Vues Mois, Semaine et Liste</li>
+          <li>Rotation automatique avec assistant</li>
+          <li>Catégories de quart personnalisables</li>
+          <li>Résumé mensuel des heures</li>
+          <li>Export vers le Calendrier d'Apple</li>
+        </ul>
+      </div>
+      <div>
+        <h3>CARTE OPÉRATIONNELLE</h3>
+        <ul>
+          <li>Postes et territoires de la SQ par district</li>
+          <li>Poste desservant un point donné</li>
+          <li>Repères kilométriques et sorties d'autoroute</li>
+          <li>Couches MTQ : caméras, travaux, entraves</li>
+          <li>Localisation et recherche d'adresse</li>
+        </ul>
+      </div>
+      <div>
+        <h3>LOIS DU QUÉBEC</h3>
+        <ul>
+          <li>Code de la sécurité routière, hors ligne</li>
+          <li>Sécurité nautique et amendes fédérales</li>
+          <li>Recherche par article ou mot-clé</li>
+          <li>Calculateur de vitesse et points d'inaptitude</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="confidentialite">
+  <div class="wrap">
+    <h2>La confidentialité d'abord</h2>
+    <p class="intro">Aucune publicité, aucun traceur, aucune vente de données. L'horaire reste sur l'appareil.</p>
+    <div class="privacy-row">
+      <div>
+        <p class="num sans">Sur l'appareil</p>
+        <p>L'horaire de chaque utilisateur demeure local, sans être transmis à un serveur externe.</p>
+      </div>
+      <div>
+        <p class="num sans">Cloisonné par corps de police</p>
+        <p>Les données sont séparées et chiffrées selon le corps de police, sans partage entre organisations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="details">
+  <div class="wrap">
+    <h2>Détails</h2>
+    <table class="details">
+      <tr><td>Développeur</td><td>Anthony Smith</td></tr>
+      <tr><td>Catégorie</td><td>Affaires et entreprises</td></tr>
+      <tr><td>Compatibilité</td><td>iPhone, nécessite iOS 26.5 ou version ultérieure</td></tr>
+      <tr><td>Langue</td><td>Anglais</td></tr>
+      <tr><td>Taille</td><td>10,1 Mo</td></tr>
+      <tr><td>Prix</td><td>Gratuit</td></tr>
+      <tr><td>Assistance</td><td><a href="https://discord.gg/bgrJVwPqyV" target="_blank" rel="noopener">Serveur Discord</a></td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="disclaimer">
+      Application indépendante, non affiliée à un corps de police ni à un organisme gouvernemental.
+      Les textes de loi sont fournis à titre de référence ; le texte officiel en vigueur prévaut.
+      © Anthony Smith.
+    </p>
+    <div>
+      <a href="https://apps.apple.com/ca/app/police-management/id6787241566?l=fr-CA" target="_blank" rel="noopener">App Store</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
