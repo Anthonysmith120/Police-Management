@@ -1,32 +1,32 @@
 # Site — Police Management
 
-## Ce qu'il faut mettre dans le repo GitHub
+Page web simple (un seul fichier `index.html` + un dossier `images/`) prête à héberger gratuitement avec GitHub Pages.
 
-Un seul fichier est nécessaire à la racine du repo :
+## Mettre le site en ligne (5 minutes)
 
-```
-Police-Management/
-└── index.html
-```
-
-C'est tout. GitHub Pages cherche automatiquement un fichier nommé **`index.html`** à la racine pour afficher la page d'accueil.
-
-## Étapes pour publier
-
-1. Va sur ton repo `Police-Management` sur GitHub
-2. Si un fichier s'appelle autre chose que `index.html` (ex. `Police`), renomme-le en `index.html`
-   - Ouvre le fichier → `...` → **Rename** → tape `index.html` → **Commit changes**
-3. Si le fichier n'existe pas encore, ajoute-le :
-   - **Add file → Create new file** → nomme-le `index.html` → colle le contenu → **Commit changes**
-4. Active GitHub Pages :
-   - **Settings → Pages**
-   - Sous "Source", choisis la branche `main` et le dossier `/ (root)`
-   - **Save**
-5. Attends 1-2 minutes, puis va sur :
-   ```
-   https://anthonysmith120.github.io/Police-Management/
-   ```
+1. Va sur [github.com](https://github.com) et crée un nouveau dépôt (**New repository**). Donne-lui un nom, par exemple `police-management-site`. Laisse-le **Public**.
+2. Dans le nouveau dépôt, clique sur **Add file → Upload files**.
+3. Glisse-dépose le fichier `index.html` et le dossier `images` (avec les 3 photos dedans) tels quels — garde la même structure de dossiers.
+4. Clique **Commit changes**.
+5. Va dans **Settings → Pages** (dans le menu de gauche).
+6. Sous **Build and deployment**, choisis la branche `main` et le dossier `/ (root)`, puis **Save**.
+7. Après 1–2 minutes, GitHub affiche l'adresse de ton site, du genre :
+   `https://ton-nom-utilisateur.github.io/police-management-site/`
 
 ## Modifier le contenu plus tard
 
-Tout le texte, les couleurs et les liens sont dans le fichier `index.html` — pas besoin d'autres fichiers pour un site aussi simple. Si tu veux ajouter des images (captures d'écran de l'app, par exemple), crée un dossier `images/` à côté de `index.html` et référence-les avec `<img src="images/nom.png">`.
+Tout le texte et les liens sont dans `index.html` — pas besoin d'outils spéciaux, un éditeur de texte suffit. Pour changer une image, remplace le fichier correspondant dans `images/` en gardant le même nom (`carte.jpeg`, `horaire.jpeg`, `lois.jpeg`), ou change le nom du fichier référencé dans `index.html`.
+
+## Activer la section « Signalement urgent »
+
+Le formulaire envoie les messages par courriel grâce à [FormSubmit](https://formsubmit.co), un service gratuit qui ne demande aucune inscription — mais il faut l'activer une fois :
+
+1. Une fois le site en ligne, remplis et envoie le formulaire une première fois (toi-même, en test).
+2. FormSubmit envoie un courriel de confirmation à **police.management@hotmail.com** avec un lien « Activate ».
+3. Clique ce lien une seule fois. Tous les envois suivants arriveront directement dans la boîte de réception, sans autre étape.
+
+Si tu veux plutôt recevoir les signalements à une autre adresse, remplace `police.management@hotmail.com` par la nouvelle adresse à deux endroits dans `index.html` : dans le `endpoint` du script en bas du fichier, et dans le texte du bas de page.
+
+## Nom de domaine personnalisé (optionnel)
+
+Si tu achètes un domaine (ex. `policemanagement.app`), tu peux le pointer vers GitHub Pages en ajoutant un fichier `CNAME` à la racine du dépôt contenant seulement ton domaine, puis en configurant les enregistrements DNS chez ton registraire selon [la documentation GitHub](https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site).
