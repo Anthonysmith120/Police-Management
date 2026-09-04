@@ -17,6 +17,19 @@ Page web simple (un seul fichier `index.html` + un dossier `images/`) prête à 
 
 Tout le texte et les liens sont dans `index.html` — pas besoin d'outils spéciaux, un éditeur de texte suffit. Pour changer une image, remplace le fichier correspondant dans `images/` en gardant le même nom (`carte.jpeg`, `horaire.jpeg`, `lois.jpeg`), ou change le nom du fichier référencé dans `index.html`.
 
+## Modifier « Prochaine mise à jour »
+
+Le fichier `prochaine-mise-a-jour.html` contient une liste que tu modifies toi-même, sans toucher au reste du code :
+
+1. Ouvre `prochaine-mise-a-jour.html` sur GitHub et clique le crayon (✏️) pour éditer.
+2. Cherche le bloc qui commence par `var roadmap = [`.
+3. Chaque élément à venir est un bloc entre `{` et `}` avec 3 champs : `titre`, `description`, `statut` (`"en-developpement"`, `"en-test"`, `"prevu"` ou `"publie"`).
+4. Copie-colle un bloc existant pour en ajouter un nouveau, ou efface-en un pour le retirer.
+5. Utilise des guillemets doubles `" "` (pas simples) pour éviter les problèmes avec les apostrophes françaises.
+6. Commit changes — la page se met à jour automatiquement.
+
+Le fichier contient les mêmes instructions en commentaire, directement au-dessus du bloc à modifier.
+
 ## Activer la section « Signalement urgent »
 
 Le formulaire envoie les messages par courriel grâce à [FormSubmit](https://formsubmit.co), un service gratuit qui ne demande aucune inscription — mais il faut l'activer une fois :
